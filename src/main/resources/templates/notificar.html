@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificar Caso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+<!-- Cabeçalho -->
+<header class="bg-blue-500 text-white text-center p-4">
+    <h1>Notificar Caso de Dengue ou Chikungunya</h1>
+</header>
+
+<!-- Menu de Navegação -->
+<nav class="bg-blue-300 p-2">
+    <ul class="flex justify-center space-x-4">
+        <li><a href="/" class="font-bold">Início</a></li>
+        <li><a href="/notificar" class="font-bold">Notificar</a></li>
+        <li><a href="/atualizar" class="font-bold">Atualizar Notificação</a></li>
+        <li><a href="/listar" class="font-bold">Listar Notificações</a></li>
+    </ul>
+</nav>
+
+<!-- Formulário de Notificação -->
+<form th:action="@{/notificar}" method="post" class="bg-white p-4 mt-4 border border-gray-300 rounded shadow-md">
+    <!-- Campo Agravo/Doença -->
+    <div class="mb-4">
+        <label for="agravo" class="block font-semibold text-gray-700 mb-2">Agravo/doença:</label>
+        <input type="text" id="agravo" name="agravo" class="border border-gray-300 p-2 w-full rounded" required>
+    </div>
+
+    <!-- Campo Data de Notificação -->
+    <div class="mb-4">
+        <label for="dataNotificacao" class="block font-semibold text-gray-700 mb-2">Data de Notificação:</label>
+        <input type="date" id="dataNotificacao" name="dataNotificacao" class="border border-gray-300 p-2 w-full rounded" required>
+    </div>
+
+    <!-- Campo Paciente -->
+    <div class="mb-4">
+        <label for="paciente" class="block font-semibold text-gray-700 mb-2">Nome do Paciente:</label>
+        <input type="text" id="paciente" name="paciente" class="border border-gray-300 p-2 w-full rounded" required>
+    </div>
+
+    <!-- Campo Endereço -->
+    <div class="mb-4">
+        <label for="endereco" class="block font-semibold text-gray-700 mb-2">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" class="border border-gray-300 p-2 w-full rounded" required>
+    </div>
+
+    <!-- Botão de Enviar -->
+    <div class="mt-4">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-semibold">Enviar</button>
+    </div>
+</form>
+</body>
+</html>
