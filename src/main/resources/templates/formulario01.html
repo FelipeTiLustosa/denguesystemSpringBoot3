@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Notificação de Casos de Dengue e Chikungunya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white p-4">
+
+<!-- Cabeçalho com o Menu -->
+<header class="bg-gray-800 p-4 text-white text-center">
+    <h1 class="text-xl font-bold">Sistema de Notificação de Casos de Dengue e Chikungunya</h1>
+</header>
+
+<!-- Menu Horizontal -->
+<nav class="bg-gray-200 p-2 mb-4">
+    <ul class="flex justify-center space-x-8">
+        <li><a href="#" class="font-bold text-gray-700">Inicio</a></li>
+        <li><a href="#" class="font-bold text-gray-700">Notificar</a></li>
+        <li><a href="#" class="font-bold text-gray-700">Atualizar Notificação</a></li>
+        <li><a href="#" class="font-bold text-gray-700">Listar Notificações</a></li>
+    </ul>
+</nav>
+
+<!-- Formulário de Notificação -->
+<div class="border border-black">
+    <div class="flex">
+        <div class="bg-gray-300 p-2 border-r border-black w-1/6">
+            <span class="text-sm font-bold">Dados Gerais</span>
+        </div>
+        <div class="w-5/6 p-2">
+
+            <!-- Campo Tipo de Notificação -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">1</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Tipo de Notificação</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm" placeholder="2 - Individual">
+                </div>
+            </div>
+
+            <!-- Campo Agravo/Doença -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">2</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Agravo/doença</span>
+                    <input type="text" class="border border-black w-12 h-6 ml-4 p-1 text-sm" placeholder="1 ou 2">
+                    <span class="text-sm ml-4">1- DENGUE</span>
+                    <span class="text-sm ml-4">2- CHIKUNGUNYA</span>
+                </div>
+            </div>
+
+            <!-- Campo Data da Notificação -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">3</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Data da Notificação</span>
+                    <input type="date" class="border border-black w-1/4 ml-4 p-1 text-sm">
+                </div>
+            </div>
+
+            <!-- Campos UF e Município de Notificação -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">4</span>
+                </div>
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">UF</span>
+                    <input type="text" class="border border-black w-full h-6 mt-1 p-1 text-sm">
+                </div>
+                <div class="w-4/6 p-1 flex items-center">
+                    <span class="text-sm">Município de Notificação</span>
+                    <input type="text" class="border border-black w-1/2 h-6 ml-4 p-1 text-sm">
+                    <span class="text-sm ml-4">Código (IBGE)</span>
+                    <input type="text" class="border border-black w-1/4 h-6 ml-2 p-1 text-sm">
+                </div>
+            </div>
+
+            <!-- Campos Unidade de Saúde e Código -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">5</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Unidade de Saúde (ou outra fonte notificadora)</span>
+                    <input type="text" class="border border-black w-1/2 h-6 ml-4 p-1 text-sm">
+                    <span class="text-sm ml-4">Código</span>
+                    <input type="text" class="border border-black w-1/4 h-6 ml-2 p-1 text-sm">
+                </div>
+            </div>
+
+            <!-- Campo Data dos Primeiros Sintomas -->
+            <div class="flex items-center">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">6</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Data dos Primeiros Sintomas</span>
+                    <input type="date" class="border border-black w-1/4 ml-4 p-1 text-sm">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
