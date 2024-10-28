@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Notificação de Casos de Dengue e Chikungunya</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function calcularIdade() {
+            const dataNascimento = document.getElementById('dataNascimento').value;
+            if (dataNascimento) {
+                const dataNasc = new Date(dataNascimento);
+                const hoje = new Date();
+                let idade = hoje.getFullYear() - dataNasc.getFullYear();
+                const m = hoje.getMonth() - dataNasc.getMonth();
+                if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) {
+                    idade--;
+                }
+                document.getElementById('idade').value = idade; // Atribui a idade calculada ao campo correspondente
+            }
+        }
+
+        function validarFormulario(event) {
+            const camposObrigatorios = [
+                document.getElementById('tipoNotificacao').value,
+                document.getElementById('agravoDoenca').value,
+                document.getElementById('dataNotificacao').value,
+                document.getElementById('uf').value,
+                document.getElementById('municipio').value,
+                document.getElementById('unidadeSaude').value,
+                document.getElementById('dataSintomas').value,
+                document.getElementById('nomePaciente').value,
+                document.getElementById('dataNascimento').value,
+                document.getElementById('idade').value
+            ];
+
+            const camposPreenchidos = camposObrigatorios.every(campo => campo.trim() !== "");
+
+            if (!camposPreenchidos) {
+                alert("Os campos obrigatórios devem ser preenchidos.");
+                event.preventDefault(); // Evita o envio do formulário
+            }
+        }
+    </script>
 </head>
 <body class="bg-white p-4">
 
@@ -22,7 +59,7 @@
         <li><a href="#" class="font-bold text-gray-700">Listar Notificações</a></li>
     </ul>
 </nav>
-
+<form onsubmit="validarFormulario(event)">
 <!-- Formulário de Notificação -->
 <div class="border border-black">
     <div class="flex">
@@ -110,5 +147,291 @@
         </div>
     </div>
 </div>
+<br>
+<!-- Notificação Individual -->
+<div class="border border-black">
+    <div class="flex">
+        <div class="bg-gray-300 p-2 border-r border-black w-1/6">
+            <span class="text-sm font-bold">Notificação Individual</span>
+        </div>
+        <div class="w-5/6 p-2">
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">8</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Nome do Paciente</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">9</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Data de Nascimento <span class="text-red-600">*</span></span>
+                    <input type="date" id="dataNascimento" class="border border-black w-1/4 ml-2 p-1 text-sm" required onchange="calcularIdade()">
+                </div>
+            </div>
+
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">10</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Idade <span class="text-red-600">*</span></span>
+                    <input type="number" id="idade" class="border border-black w-1/4 ml-2 p-1 text-sm" readonly>
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">11</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Sexo</span>
+                    <div class="flex items-center mt-1">
+                        <span class="text-sm ml-4">M - Masculino</span>
+                        <span class="text-sm ml-4">F - Feminino</span>
+                        <span class="text-sm ml-4">I - Ignorado</span>
+                        <input type="text" class="border border-black w-1/4 ml-4 p-1 text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">12</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Gestante</span>
+                    <div class="flex items-center mt-1">
+                        <span class="text-sm ml-4">1-1º Trimestre</span>
+                        <span class="text-sm ml-4">2-2º Trimestre</span>
+                        <span class="text-sm ml-4">3-3º Trimestre</span>
+                        <span class="text-sm ml-4">4-Idade gestacional Ignorada</span>
+                        <span class="text-sm ml-4">5-Não</span>
+                        <span class="text-sm ml-4">6-Não se aplica</span>
+                        <span class="text-sm ml-4">9-Ignorado</span>
+                        <input type="text" class="border border-black w-1/4 ml-4 p-1 text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">13</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Raça/Cor</span>
+                    <div class="flex items-center mt-1">
+                        <span class="text-sm ml-4">1-Branca</span>
+                        <span class="text-sm ml-4">2-Preta</span>
+                        <span class="text-sm ml-4">3-Amarela</span>
+                        <span class="text-sm ml-4">4-Parda</span>
+                        <span class="text-sm ml-4">5-Indígena</span>
+                        <span class="text-sm ml-4">9-Ignorado</span>
+                        <input type="text" class="border border-black w-1/4 ml-4 p-1 text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">14</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Escolaridade</span>
+                    <div class="flex items-center mt-1">
+                        <span class="text-sm ml-4">0-Analfabeto</span>
+                        <span class="text-sm ml-4">1-1ª a 4ª série incompleta do EF</span>
+                        <span class="text-sm ml-4">2-4ª série completa do EF</span>
+                        <span class="text-sm ml-4">3-5ª a 8ª série incompleta do EF</span>
+                        <span class="text-sm ml-4">4-Ensino fundamental completo</span>
+                        <span class="text-sm ml-4">5-Ensino médio incompleto</span>
+                        <span class="text-sm ml-4">6-Ensino médio completo</span>
+                        <span class="text-sm ml-4">7-Educação superior incompleta</span>
+                        <span class="text-sm ml-4">8-Educação superior completa</span>
+                        <span class="text-sm ml-4">9-Ignorado</span>
+                        <span class="text-sm ml-4">10-Não se aplica</span>
+                        <input type="text" class="border border-black w-1/4 ml-4 p-1 text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">15</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Número do Cartão SUS</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <div class="flex items-center">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">16</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Nome da Mãe</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dados de Residência -->
+<div class="border border-black mt-4">
+    <div class="flex">
+        <div class="bg-gray-300 p-2 border-r border-black w-1/6">
+            <span class="text-sm font-bold">Dados de Residência</span>
+        </div>
+        <div class="w-5/6 p-2">
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">17</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">UF</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">18</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Município de Residência</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">19</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Código (IBGE)</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">20</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Distrito</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">21</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Bairro</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">22</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Logradouro (rua, avenida,...)</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">23</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Número</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+
+            <!-- Geo campo 1 -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">24</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Geo campo 1</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <!-- Geo campo 2 -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">25</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Geo campo 2</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <!-- Ponto de Referência -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">26</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Ponto de Referência</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <!-- CEP -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">27</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">CEP</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <!-- (DDD) Telefone -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">28</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">(DDD) Telefone</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+            <!-- Zona -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">29</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">Zona</span>
+                    <div class="flex items-center mt-1">
+                        <span class="text-sm ml-4">1 - Urbana</span>
+                        <span class="text-sm ml-4">2 - Rural</span>
+                        <span class="text-sm ml-4">3 - Periurbana</span>
+                        <span class="text-sm ml-4">9 - Ignorado</span>
+                        <input type="text" class="border border-black w-1/4 ml-4 p-1 text-sm">
+                    </div>
+                </div>
+            </div>
+            <!-- País (se residente fora do Brasil) -->
+            <div class="flex items-center border-b border-black">
+                <div class="w-1/6 p-1 border-r border-black">
+                    <span class="text-sm">30</span>
+                </div>
+                <div class="w-5/6 p-1 flex items-center">
+                    <span class="text-sm">País (se residente fora do Brasil)</span>
+                    <input type="text" class="border border-black w-1/2 ml-2 p-1 text-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <br>
+
+    <!-- Botão de Enviar -->
+    <div class="flex justify-center">
+        <button type="submit" class="bg-blue-500 text-white p-2 rounded">Enviar Notificação</button>
+    </div>
+</form>
 </body>
 </html>
